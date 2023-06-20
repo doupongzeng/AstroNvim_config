@@ -24,34 +24,56 @@ return {
   { "max397574/better-escape.nvim", enabled = false },
   {
     "hrsh7th/nvim-cmp",
-    keys = {":", "/", "?"},
+    keys = { ":", "/", "?" },
     dependencies = {
       "hrsh7th/cmp-cmdline",
     },
-    config = function (_, opts)
+    config = function(_, opts)
       local cmp = require "cmp"
       cmp.setup(opts)
 
+      local mapkey = {
+        ["<C-j>"] = {
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+        },
+        ["<C-k>"] = {
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
+        },
+      }
+
       cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline(mapkey),
         sources = {
-          { name = "buffer"},
-        }
+          { name = "buffer" },
+        },
       })
 
       cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline(mapkey),
         sources = cmp.config.sources({
-          {name = "path"},
+          { name = "path" },
         }, {
-            { name = "cmdline",
-              options = {
-                ignore_cmds = {"Man", "!"}
-              }
+          {
+            name = "cmdline",
+            options = {
+              ignore_cmds = { "Man", "!" },
             },
-          })
+          },
+        }),
       })
-    end
+    end,
   },
   --
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
