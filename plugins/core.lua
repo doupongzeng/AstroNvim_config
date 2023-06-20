@@ -22,6 +22,37 @@ return {
   },
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
+  {
+    "hrsh7th/nvim-cmp",
+    keys = {":", "/", "?"},
+    dependencies = {
+      "hrsh7th/cmp-cmdline",
+    },
+    config = function (_, opts)
+      local cmp = require "cmp"
+      cmp.setup(opts)
+
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer"},
+        }
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          {name = "path"},
+        }, {
+            { name = "cmdline",
+              options = {
+                ignore_cmds = {"Man", "!"}
+              }
+            },
+          })
+      })
+    end
+  },
   --
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   -- {
