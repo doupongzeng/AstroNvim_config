@@ -20,9 +20,18 @@ return {
     ["<leader>b"] = { name = "Buffers" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<C-_>"] = {
+      function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Toggle comment line",
+    },
+    ["<C-n>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
   },
-  t = {
+  v = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
+    ["<C-_>"] = {
+      "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+      desc = "Toggle comment for selection",
+    }
   },
 }
