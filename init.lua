@@ -52,9 +52,6 @@ return {
     servers = {
       -- "pyright"
     },
-    setup_handlers = {
-      clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end,
-    },
   },
 
   -- Configure require("lazy").setup() options

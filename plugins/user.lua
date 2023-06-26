@@ -7,10 +7,4 @@ return {
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
   },
-
-  {
-    -- install clangd_extensions
-    "p00f/clangd_extensions.nvim",
-    ft = { "c", "cpp" },
-  },
 }
