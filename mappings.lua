@@ -28,7 +28,11 @@ return {
     },
     ["<C-n>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" },
     ["<leader>4"] = { "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch src/hdr" },
-    ["<leader>tt"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float default"}
+    ["<leader>tt"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float default" },
+    ["<leader>lH"] = {
+      function() vim.lsp.inlay_hint(0) end,
+      desc = "Toggle inlay_hint",
+    },
   },
   v = {
     -- setting a mapping to false will disable it
