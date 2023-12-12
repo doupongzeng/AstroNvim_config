@@ -30,7 +30,13 @@ return {
     ["<leader>4"] = { "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch src/hdr" },
     ["<leader>tt"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float default" },
     ["<leader>lH"] = {
-      function() vim.lsp.inlay_hint(0) end,
+      function()
+        if vim.lsp.inlay_hint.is_enabled(nil) then
+          vim.lsp.inlay_hint.enable(nil, false)
+        else
+          vim.lsp.inlay_hint.enable(nil, true)
+        end
+      end,
       desc = "Toggle inlay_hint",
     },
   },
